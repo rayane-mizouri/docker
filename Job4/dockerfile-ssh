@@ -1,0 +1,21 @@
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y openssh-server
+
+RUN mkdir /var/run/sshd
+
+#mot de passe pour le compte root
+RUN echo 'root:fgh' | chpasswd
+
+#modification du port de connexion
+RUN sed -i 's/#Port 22/Port 666/' /etc/ssh/sshd_config
+
+#autorise la connexion ssh avec le compte root
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+#indique à docker par quel port passer
+EXPOSE 666
+
+CMD ["/usr/sbin/sshd", "-D"]

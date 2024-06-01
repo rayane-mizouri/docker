@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - shared-data:/usr/share/nginx/html
+
+  ftp:
+    image: delfer/alpine-ftp-server:latest
+    network_mode: host
+    volumes:
+      - shared-data:/ftp/rayane
+    environment:
+      - USERS=rayane|rayane
+    restart: always
+
+volumes:
+  shared-data:

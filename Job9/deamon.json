@@ -1,0 +1,4 @@
+json
+{
+  "insecure-registries": ["192.168.XXX.XXX:5000"]
+}

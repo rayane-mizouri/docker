@@ -1,0 +1,1 @@
+Baptisée Data Volume Container, ce mécanisme consiste à créer un conteneur nommé puis à lui attacher des volumes. Il sera ensuite possible de consommer ces volumes depuis d’autres conteneurs
